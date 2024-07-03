@@ -14,6 +14,23 @@ class Post {
     }
   }
 
+  static async fetchAll() {
+    const posts = await db.getDb().collection('posts').find().toArray();
+    return posts;
+  }
+
+  async fetch() {
+    if (!this.id) {
+      return;
+    }
+    const postDocument = await db
+      .getDb()
+      .collection('posts')
+      .findOne({ _id: this.id });
+    this.title = postDocument.title;
+    this.content = postDocument.content;
+  }
+
   async save() {
     let result;
     if (this.id) {
@@ -30,7 +47,6 @@ class Post {
         content: this.content,
       });
     }
-
     return result;
   }
 
@@ -38,8 +54,10 @@ class Post {
     if (!this.id) {
       return;
     }
-
-    const result = await db.getDb().collection('posts').deleteOne({ _id: this.id });
+    const result = await db
+      .getDb()
+      .collection('posts')
+      .deleteOne({ _id: this.id });
     return result;
   }
 }
