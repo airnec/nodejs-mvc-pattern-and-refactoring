@@ -14,6 +14,6 @@ router.get('/posts/:id/edit', blogControllers.getSinglePost);
 
 router.post('/posts/:id/edit', blogControllers.updatePost);
 
-router.post('/posts/:id/delete', dblogControllers.eletePost);
+router.post('/posts/:id/delete', blogControllers.deletePost);
 
 module.exports = router;

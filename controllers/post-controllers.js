@@ -62,7 +62,7 @@ async function getSinglePost(req, res) {
   await post.fetch();
 
   if (!post.title || !post.content) {
-    return res.render('404'); // 404.ejs is missing at this point - it will be added later!
+    return res.render('404');
   }
 
   let sessionInputData = req.session.inputData;
@@ -114,7 +114,6 @@ async function updatePost(req, res) {
 async function deletePost(req, res) {
   const post = new Post(null, null, req.params.id);
   await post.delete();
-
   res.redirect('/admin');
 }
 
@@ -124,5 +123,5 @@ module.exports = {
   createPost: createPost,
   getSinglePost: getSinglePost,
   updatePost: updatePost,
-  deletePost: deletePost,
+  deletePost: deletePost
 };
