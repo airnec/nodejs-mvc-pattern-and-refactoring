@@ -2,14 +2,15 @@ const Post = require('../models/post');
 const validationSession = require('../util/validation-session');
 const validation = require('../util/validation');
 
+function get401(req, res) {
+  res.status(401).render('401');
+}
+
 function getHome(req, res) {
   res.render('welcome');
 }
 
 async function getAdmin(req, res) {
-  if (!res.locals.isAuth) {
-    return res.status(401).render('401');
-  }
 
   const posts = await Post.fetchAll();
 
@@ -109,4 +110,5 @@ module.exports = {
   getSinglePost: getSinglePost,
   updatePost: updatePost,
   deletePost: deletePost,
+  get401: get401
 };

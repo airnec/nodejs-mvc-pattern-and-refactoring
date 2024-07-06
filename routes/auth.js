@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const db = require('../data/database');
+const authControllers = require('../controllers/post-controllers');
 
 const router = express.Router();
 
@@ -153,5 +154,7 @@ router.post('/logout', function (req, res) {
   req.session.isAuthenticated = false;
   res.redirect('/');
 });
+
+router.get('/401', authControllers.get401);
 
 module.exports = router;
